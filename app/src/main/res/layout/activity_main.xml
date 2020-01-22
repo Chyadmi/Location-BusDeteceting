@@ -89,6 +89,7 @@
 
 
             <LinearLayout
+                android:id="@+id/loc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
@@ -112,6 +113,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/bus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
