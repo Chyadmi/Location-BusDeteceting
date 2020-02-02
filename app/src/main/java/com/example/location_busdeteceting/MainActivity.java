@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.animation.Animation;
@@ -22,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
     ImageView bgapp, clover;
     LinearLayout textsplash, texthome, menus,location,bus;
     Animation frombottom;
-
+    Vibrator vibrator;              //a vibrator to vibrate used in onLongClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeTextToSpeech();
 
-
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
 
 
@@ -51,9 +54,18 @@ public class MainActivity extends AppCompatActivity {
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                speake("location service");
+                speake("localisation service");
             }
         });   ///the speak fct see bottom
+        location.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                vibrator.vibrate(100);
+                Intent intMap=new Intent(MainActivity.this,MapsActivity.class);
+                startActivity(intMap);
+                return false;
+            }
+        });
         bus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
